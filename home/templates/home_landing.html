@@ -1,0 +1,797 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+{% block homeactive %}active{% endblock homeactive %}
+{% block body_class %}home-page{% endblock %}
+
+{% block css %}
+.home-page {
+  --glass-bg: rgba(255, 255, 255, 0.07);
+  --glass-bg-strong: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --glass-border-hover: rgba(255, 255, 255, 0.34);
+  --home-text: #f1f5f9;
+  --home-muted: rgba(226, 232, 240, 0.72);
+  background: #070b16;
+  color: var(--home-text);
+  overflow-x: hidden;
+}
+
+.home-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.home-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 700px at 12% -10%, rgba(37, 99, 235, 0.28), transparent 58%),
+    radial-gradient(900px 640px at 92% 8%, rgba(124, 58, 237, 0.24), transparent 55%),
+    radial-gradient(800px 500px at 50% 100%, rgba(37, 99, 235, 0.12), transparent 60%),
+    linear-gradient(180deg, #070b16 0%, #0b1224 48%, #070b16 100%);
+}
+
+.home-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.7;
+  will-change: transform;
+  animation: orbDrift 28s ease-in-out infinite;
+}
+.home-orb-a {
+  width: 420px; height: 420px;
+  left: -8%; top: 6%;
+  background: rgba(37, 99, 235, 0.55);
+}
+.home-orb-b {
+  width: 360px; height: 360px;
+  right: -6%; top: 18%;
+  background: rgba(124, 58, 237, 0.5);
+  animation-duration: 34s;
+  animation-direction: reverse;
+}
+.home-orb-c {
+  width: 280px; height: 280px;
+  left: 42%; top: 58%;
+  background: rgba(56, 189, 248, 0.28);
+  animation-duration: 40s;
+}
+@keyframes orbDrift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(36px, -28px, 0); }
+}
+
+.home-particles { position: absolute; inset: 0; }
+.home-particles span {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 10px rgba(147, 197, 253, 0.45);
+  animation: particleFloat 16s linear infinite;
+  opacity: 0.35;
+}
+.home-particles span:nth-child(1) { left: 12%; top: 22%; animation-delay: 0s; }
+.home-particles span:nth-child(2) { left: 28%; top: 68%; animation-delay: -4s; width: 3px; height: 3px; }
+.home-particles span:nth-child(3) { left: 48%; top: 18%; animation-delay: -8s; }
+.home-particles span:nth-child(4) { left: 72%; top: 42%; animation-delay: -2s; width: 4px; height: 4px; }
+.home-particles span:nth-child(5) { left: 86%; top: 76%; animation-delay: -10s; }
+.home-particles span:nth-child(6) { left: 62%; top: 12%; animation-delay: -6s; width: 3px; height: 3px; }
+.home-particles span:nth-child(7) { left: 18%; top: 84%; animation-delay: -12s; }
+.home-particles span:nth-child(8) { left: 91%; top: 28%; animation-delay: -3s; }
+@keyframes particleFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: .25; }
+  50% { transform: translate3d(0, -18px, 0); opacity: .55; }
+}
+
+.home-content { position: relative; z-index: 1; }
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 10px 40px rgba(2, 6, 23, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.btn-glass-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.88));
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.32), 0 0 0 0 rgba(37, 99, 235, 0.35);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, filter .28s ease;
+}
+.btn-glass-primary:hover {
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-3px);
+  filter: brightness(1.06);
+  box-shadow: 0 16px 36px rgba(37, 99, 235, 0.42), 0 0 28px rgba(124, 58, 237, 0.28);
+}
+.btn-glass-primary:active { transform: translateY(-1px); }
+.btn-glass-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), background .28s ease, border-color .28s ease;
+}
+.btn-glass-secondary:hover {
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--glass-border-hover);
+}
+.btn-glass-primary:focus-visible,
+.btn-glass-secondary:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+/* Hero */
+.home-hero {
+  padding: 4.5rem 0 3.2rem;
+}
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #dbeafe;
+  background: rgba(37, 99, 235, 0.18);
+  border: 1px solid rgba(147, 197, 253, 0.28);
+}
+.hero-kicker-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #60a5fa;
+  box-shadow: 0 0 10px #60a5fa;
+}
+.home-hero-title {
+  font-size: clamp(2.15rem, 4.4vw, 4.1rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.05;
+  margin: 1.1rem 0 .9rem;
+  color: #fff;
+}
+.home-hero-title span {
+  background: linear-gradient(90deg, #93c5fd 0%, #c4b5fd 55%, #fff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.home-hero-sub {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--home-muted);
+  max-width: 540px;
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 1.7rem; }
+
+.hero-visual { position: relative; min-height: 420px; }
+.hero-glow {
+  position: absolute;
+  inset: 18% 12%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.35), transparent 70%);
+  filter: blur(30px);
+  z-index: 0;
+}
+.float-card {
+  position: absolute;
+  z-index: 2;
+  border-radius: 18px;
+  padding: 14px 16px;
+  max-width: 220px;
+  animation: floatY 7s ease-in-out infinite;
+}
+.float-card h6 { margin: 0; font-size: .92rem; font-weight: 700; color: #fff; }
+.float-card p { margin: 4px 0 0; font-size: .78rem; color: var(--home-muted); line-height: 1.45; }
+.float-a { top: 8%; left: 2%; }
+.float-b { top: 38%; right: 0; animation-delay: -2.4s; animation-duration: 8.5s; }
+.float-c { bottom: 8%; left: 10%; animation-delay: -4s; }
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-preview {
+  position: absolute;
+  inset: 16% 10% 18% 12%;
+  border-radius: 24px;
+  overflow: hidden;
+  z-index: 1;
+}
+.hero-preview img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transform: scale(1.04);
+}
+.hero-preview-ov {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(7,11,22,.05) 0%, rgba(7,11,22,.62) 100%);
+}
+.hero-preview-caption {
+  position: absolute; left: 18px; right: 18px; bottom: 16px;
+  color: #fff;
+}
+.hero-preview-caption small { opacity: .75; }
+
+.enter {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp .7s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.enter-2 { animation-delay: .12s; }
+.enter-3 { animation-delay: .22s; }
+.enter-4 { animation-delay: .32s; }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px) scale(.985);
+  transition: opacity .6s cubic-bezier(.2,.8,.2,1), transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.section-head { margin-bottom: 1.4rem; }
+.section-kicker {
+  color: #93c5fd;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.section-title {
+  font-size: clamp(1.5rem, 2.4vw, 2.05rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: #fff;
+  margin: .35rem 0 .4rem;
+}
+.section-sub { color: var(--home-muted); max-width: 540px; }
+
+/* Carousel */
+.car-wrap {
+  position: relative;
+  height: 520px;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #0b1220;
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.18);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+.car-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: opacity .7s ease, transform .7s ease;
+  opacity: 0; transform: scale(1.04);
+  pointer-events: none;
+}
+.car-slide.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+.car-ov {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 11, 22, 0.8) 0%, rgba(7, 11, 22, 0.45) 30%, rgba(7, 11, 22, 0.12) 58%, rgba(7, 11, 22, 0.6) 100%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(15, 23, 42, 0.7) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2.25rem 2.25rem;
+}
+.car-txt {
+  position: relative;
+  z-index: 1;
+  max-width: 530px;
+  padding: 1.25rem 1.35rem 1.4rem;
+  background: rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  border-radius: 20px;
+  box-shadow: 0 16px 30px rgba(2, 6, 23, 0.12);
+  color: #fff;
+}
+.c-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #edf3ff;
+  font-size: .72rem; padding: 5px 11px; border-radius: 999px;
+  margin-bottom: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.c-title {
+  font-size: clamp(2.1rem, 2.9vw, 3.2rem);
+  font-weight: 800; line-height: 1.02;
+  letter-spacing: -.055em; margin-bottom: 10px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
+.c-sub { font-size: 1rem; opacity: .9; line-height: 1.6; max-width: 470px; margin-bottom: 18px; }
+.c-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.c-b1 {
+  background: linear-gradient(135deg, #ffffff 0%, #edf2ff 100%);
+  color: #0f172a; border: none; border-radius: 999px;
+  padding: 11px 22px; font-weight: 800; font-size: .86rem;
+  text-decoration: none; display: inline-block;
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 12px 20px rgba(15, 23, 42, 0.12);
+}
+.c-b1:hover { background: #ffffff; color: #0f172a; text-decoration: none; transform: translateY(-2px); }
+.c-b2 {
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,.16);
+  border-radius: 999px; padding: 11px 22px; font-size: .86rem;
+  text-decoration: none; display: inline-block;
+  backdrop-filter: blur(8px);
+  transition: background .25s ease, transform .25s ease;
+}
+.c-b2:hover { background: rgba(255,255,255,.08); color: #fff; text-decoration: none; transform: translateY(-2px); }
+
+/* Trending + features */
+.trend-panel { border-radius: 22px; overflow: hidden; }
+.panel-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--glass-border);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+}
+.panel-header a { color: #93c5fd; font-weight: 600; }
+.panel-header a:hover { color: #c4b5fd; }
+.trend-item {
+  padding: 1rem 1.25rem;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  text-decoration: none; color: inherit;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  transition: background .25s ease;
+}
+.trend-item:last-child { border-bottom: 0; }
+.trend-item:hover { background: rgba(37, 99, 235, 0.12); color: inherit; text-decoration: none; }
+.trend-title { font-weight: 600; color: #fff; }
+.trend-meta { color: var(--home-muted); font-size: .85rem; margin-top: .15rem; }
+.metric-pill {
+  font-weight: 600; font-size: .85rem;
+  padding: .35rem .6rem; border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, .28);
+  background: rgba(37, 99, 235, .18);
+  color: #bfdbfe; white-space: nowrap;
+}
+
+.glass-feature {
+  border-radius: 20px;
+  padding: 1.45rem 1.35rem;
+  height: 100%;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s ease, box-shadow .35s ease;
+}
+.glass-feature:hover {
+  transform: translateY(-4px);
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 16px 40px rgba(2, 6, 23, 0.32), 0 0 24px rgba(37, 99, 235, 0.12);
+}
+.glass-feature .icon-chip {
+  width: 42px; height: 42px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, rgba(37,99,235,.28), rgba(124,58,237,.22));
+  border: 1px solid rgba(255,255,255,.14);
+  font-size: 1.05rem;
+}
+.glass-feature h5 { margin: 0; font-weight: 700; letter-spacing: -.02em; color: #fff; }
+.glass-feature p { margin: .55rem 0 0; color: var(--home-muted); line-height: 1.6; }
+
+.home-cta-band {
+  margin: 3.5rem 0 1rem;
+  border-radius: 24px;
+  padding: 2.2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.home-cta-band::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -40% auto;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(124,58,237,.35), transparent 70%);
+  pointer-events: none;
+}
+
+.home-page .footer-modern {
+  background:
+    radial-gradient(900px 500px at 10% 20%, rgba(37,99,235,.16), transparent 55%),
+    radial-gradient(700px 420px at 90% 10%, rgba(124,58,237,.14), transparent 50%),
+    linear-gradient(180deg, #0b1220 0%, #070b16 100%);
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: #e2e8f0;
+}
+.home-page .footer-modern .text-muted,
+.home-page .footer-modern a.text-muted { color: rgba(226,232,240,.7) !important; }
+.home-page .footer-modern a.text-muted:hover { color: #93c5fd !important; }
+.home-page .footer-modern .fw-bold { color: #fff; }
+.home-page .footer-brand-name {
+  background: linear-gradient(90deg, #fff, #93c5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.home-page .footer-logo-wrap::after { background: #0b1220; }
+.home-page .footer-social {
+  color: #e2e8f0;
+  border-color: rgba(255,255,255,.2);
+}
+.home-page .footer-social:hover {
+  background: rgba(37,99,235,.2);
+  border-color: rgba(96,165,250,.4);
+  color: #fff;
+}
+.home-page .btn-light {
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.16);
+}
+
+@media (max-width: 991.98px) {
+  .hero-visual { min-height: 340px; margin-top: 1.5rem; }
+  .float-card { max-width: 180px; padding: 10px 12px; }
+  .home-particles { display: none; }
+}
+@media (max-width: 576px) {
+  .home-hero { padding: 2.6rem 0 2rem; }
+  .car-wrap { height: 360px; }
+  .c-title { font-size: 1.55rem; }
+  .car-ov { padding: 1.3rem 1.1rem 2.2rem; }
+  .c-sub { font-size: .9rem; }
+  .float-b, .float-c { display: none; }
+  .home-orb { filter: blur(56px); opacity: .5; }
+  .hero-cta .btn-glass-primary,
+  .hero-cta .btn-glass-secondary { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-orb, .home-particles span, .float-card, .enter { animation: none !important; }
+  .enter, .reveal { opacity: 1; transform: none; }
+  .glass-feature, .btn-glass-primary, .btn-glass-secondary, .car-slide, .c-b1, .c-b2 {
+    transition: none;
+  }
+}
+{% endblock %}
+
+
+{% block body %}
+<div class="home-stage">
+  <div class="home-bg" aria-hidden="true">
+    <div class="home-orb home-orb-a"></div>
+    <div class="home-orb home-orb-b"></div>
+    <div class="home-orb home-orb-c"></div>
+    <div class="home-particles">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="home-content">
+
+    <section class="home-hero">
+      <div class="container">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6">
+            <div class="enter">
+              <span class="hero-kicker"><span class="hero-kicker-dot"></span> Timeless Tales</span>
+            </div>
+            <h1 class="home-hero-title enter enter-2">
+              Share stories worth <span>coming back to.</span>
+            </h1>
+            <p class="home-hero-sub enter enter-3">
+              A premium home for writers and readers — trending posts, thoughtful drafts,
+              and engagement that helps great stories find their audience.
+            </p>
+            <div class="hero-cta enter enter-4">
+              <a class="btn-glass-primary" href="/blogs/">Explore Blogs</a>
+              {% if user.is_authenticated %}
+              <a class="btn-glass-secondary" href="/add_blogs/">Write a Blog</a>
+              {% else %}
+              <a class="btn-glass-secondary" href="/login/">Login to Write</a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="hero-visual enter enter-3">
+              <div class="hero-glow"></div>
+              <div class="hero-preview glass">
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80" alt="Writer at a desk">
+                <div class="hero-preview-ov"></div>
+                <div class="hero-preview-caption">
+                  <div class="fw-bold">Stories, crafted with care</div>
+                  <small>Read · write · grow on one platform</small>
+                </div>
+              </div>
+              <div class="float-card glass float-a">
+                <h6>Live insights</h6>
+                <p>Views and likes, updated as readers engage.</p>
+              </div>
+              <div class="float-card glass float-b">
+                <h6>Draft in private</h6>
+                <p>Publish only when the piece feels finished.</p>
+              </div>
+              <div class="float-card glass float-c">
+                <h6>Find your topic</h6>
+                <p>Search and browse categories in seconds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="container reveal">
+      <div class="section-head">
+        <div class="section-kicker">Featured</div>
+        <h2 class="section-title">A platform built for writers</h2>
+        <p class="section-sub mb-0">Swipe through what Timeless Tales is about — then dive into the stories themselves.</p>
+      </div>
+
+      <div class="glass" style="padding: 10px; border-radius: 28px;">
+        <div class="car-wrap" id="heroCarousel">
+          <div class="car-slide active"
+               style="background-image: url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1400&q=80');">
+            <div class="car-ov">
+              <div class="car-txt">
+                <div class="c-badge">Blogging Platform</div>
+                <div class="c-title">Welcome to Timeless Tales</div>
+                <div class="c-sub">Discover stories, ideas, and perspectives from writers around the world.</div>
+                <div class="c-btns">
+                  <a href="/blogs/" class="c-b1">Explore Blogs</a>
+                  {% if user.is_authenticated %}
+                  <a href="/add_blogs/" class="c-b2">+ Write Now</a>
+                  {% else %}
+                  <a href="/register/" class="c-b2">Join Free</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="car-slide"
+               style="background-image: url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1400&q=80');">
+            <div class="car-ov">
+              <div class="car-txt">
+                <div class="c-badge">Writer Analytics</div>
+                <div class="c-title">Know Your Audience</div>
+                <div class="c-sub">Real-time views, likes, and analytics — all in your personal writer dashboard.</div>
+                <div class="c-btns">
+                  <a href="/dashboard/" class="c-b1">My Dashboard</a>
+                  <a href="/add_blogs/" class="c-b2">Start Writing</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="car-slide"
+               style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1400&q=80');">
+            <div class="car-ov">
+              <div class="car-txt">
+                <div class="c-badge">Community</div>
+                <div class="c-title">Read. React. Connect.</div>
+                <div class="c-sub">Comment, like, and engage with blogs that matter to you every single day.</div>
+                <div class="c-btns">
+                  <a href="/search/" class="c-b1">Search Topics</a>
+                  <a href="/blogs/" class="c-b2">Browse All</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="car-slide"
+               style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1400&q=80');">
+            <div class="car-ov">
+              <div class="car-txt">
+                <div class="c-badge">Top Writers</div>
+                <div class="c-title">Share Your Story</div>
+                <div class="c-sub">Join thousands of writers who publish, grow, and inspire every day on Timeless Tales.</div>
+                <div class="c-btns">
+                  <a href="/register/" class="c-b1">Start Today</a>
+                  <a href="/blogs/" class="c-b2">Meet Writers</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="car-slide"
+               style="background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1400&q=80');">
+            <div class="car-ov">
+              <div class="car-txt">
+                <div class="c-badge">Categories</div>
+                <div class="c-title">Every Topic. One Place.</div>
+                <div class="c-sub">From tech to travel, lifestyle to literature — find your category and dive deep.</div>
+                <div class="c-btns">
+                  <a href="/" class="c-b1">Browse Categories</a>
+                  <a href="/add_blogs/" class="c-b2">Write a Blog</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <section class="container my-5">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-7 reveal">
+          <div class="section-head">
+            <div class="section-kicker">Trending</div>
+            <h2 class="section-title">What readers are opening now</h2>
+          </div>
+          <div class="trend-panel glass">
+            <div class="panel-header d-flex align-items-center justify-content-between">
+              <div class="fw-bold" style="color:#fff;">Trending now</div>
+              <a class="text-decoration-none" href="/blogs/">See all</a>
+            </div>
+            <div>
+              {% for b in top_blogs %}
+              <a href="/blog/{{ b.slug }}/" class="trend-item">
+                <div>
+                  <div class="trend-title">{{ b.title|truncatechars:46 }}</div>
+                  <div class="trend-meta">
+                    by {{ b.author }} · {{ b.read_time_minutes }} min read
+                  </div>
+                </div>
+                <span class="metric-pill">{{ b.views }} views</span>
+              </a>
+              {% empty %}
+              <div class="p-4" style="color: var(--home-muted);">No posts yet. Start by adding a blog.</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 reveal">
+          <div class="section-head">
+            <div class="section-kicker">Why writers stay</div>
+            <h2 class="section-title">Tools that stay out of the way</h2>
+          </div>
+          <div class="d-flex flex-column gap-3">
+            <div class="glass-feature glass">
+              <div class="icon-chip">↗</div>
+              <h5>Insights</h5>
+              <p>Track views and likes to understand what readers enjoy most.</p>
+            </div>
+            <div class="glass-feature glass">
+              <div class="icon-chip">✎</div>
+              <h5>Drafts</h5>
+              <p>Write privately, refine, and publish when your post is ready.</p>
+            </div>
+            <div class="glass-feature glass">
+              <div class="icon-chip">⌕</div>
+              <h5>Discovery</h5>
+              <p>Search posts and browse by category to find what you need quickly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="container">
+      <div class="row g-4">
+        <div class="col-md-4 reveal">
+          <div class="glass-feature glass h-100">
+            <div class="icon-chip">01</div>
+            <h5>Write with focus</h5>
+            <p>A calm editor for drafts and published pieces — no clutter, just your story.</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="glass-feature glass h-100">
+            <div class="icon-chip">02</div>
+            <h5>Grow with data</h5>
+            <p>Your dashboard surfaces views, likes, and what is connecting with readers.</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="glass-feature glass h-100">
+            <div class="icon-chip">03</div>
+            <h5>Meet your audience</h5>
+            <p>Comments and likes turn posts into conversations that last beyond the headline.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-cta-band glass reveal">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-8">
+            <div class="section-kicker">Start today</div>
+            <h2 class="section-title mb-2">Your next story already has a home.</h2>
+            <p class="section-sub mb-0">Join Timeless Tales to publish, measure, and keep writing.</p>
+          </div>
+          <div class="col-lg-4 d-flex flex-wrap gap-2 justify-content-lg-end">
+            {% if user.is_authenticated %}
+            <a class="btn-glass-primary" href="/add_blogs/">Write a Blog</a>
+            <a class="btn-glass-secondary" href="/dashboard/">Dashboard</a>
+            {% else %}
+            <a class="btn-glass-primary" href="/register/">Join Free</a>
+            <a class="btn-glass-secondary" href="/blogs/">Explore Blogs</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+(function () {
+  var slides = document.querySelectorAll('#heroCarousel .car-slide');
+  var total = slides.length;
+  var cur = 0;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timer;
+
+  function go(n) {
+    slides[cur].classList.remove('active');
+    cur = (n + total) % total;
+    slides[cur].classList.add('active');
+  }
+
+  if (!reduce) {
+    timer = setInterval(function () { go(cur + 1); }, 4000);
+  }
+
+  var reveals = document.querySelectorAll('.reveal');
+  if (reduce) {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  }
+})();
+</script>
+{% endblock %}

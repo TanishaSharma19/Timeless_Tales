@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block css %}
+.search-card { opacity: 0; animation: blogFadeIn .4s ease forwards; }
+.search-card:nth-child(1) { animation-delay: .05s; }
+.search-card:nth-child(2) { animation-delay: .1s; }
+.search-card:nth-child(3) { animation-delay: .15s; }
+@keyframes blogFadeIn { to { opacity: 1; } }
+.search-img-wrap { height: 200px; background: linear-gradient(145deg, #e0e7ff 0%, #c7d2fe 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.search-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+{% endblock %}
+{% block body %}
+<div class="page-shell">
+  <div class="container py-5">
+    {% if searched != None %}
+      {% if searched %}
+      <div class="page-header">
+        <div>
+          <div class="eyebrow">Search</div>
+          <h1 class="section-heading">Results for "{{ searched }}"</h1>
+        </div>
+      </div>
+      <div class="row g-4">
+        {% for blog in blogs %}
+        <div class="col-lg-4 search-card">
+          <div class="card h-100 shadow-sm border-0 overflow-hidden" style="border-radius: 22px;">
+            <div class="search-img-wrap card-img-top">
+              {% if blog.image %}
+              <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+              {% else %}
+              <span class="text-secondary" style="font-size: 2.5rem; opacity: .6;">📖</span>
+              {% endif %}
+            </div>
+            <div class="card-body d-flex flex-column">
+              <div class="small text-uppercase text-muted mb-2" style="letter-spacing: .08em; font-weight: 700;">{{ blog.category.name|default:'Story' }}</div>
+              <h5 class="card-title mb-2" style="font-weight: 800; letter-spacing: -0.03em;">{{ blog.title }}</h5>
+              <p class="card-text text-secondary flex-grow-1">{{ blog.content|truncatechars:180 }}</p>
+              <div class="text-muted small mb-3">👁 {{ blog.views }} views · 🕑 {{ blog.read_time_minutes }} min read</div>
+              <a href="/blog/{{ blog.slug }}/" class="btn btn-primary align-self-start">Read More</a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+          <div class="glass-panel p-5 text-center">
+            <h3 class="mb-3" style="letter-spacing:-0.05em; font-weight:800;">No stories matched that search.</h3>
+            <p class="text-muted mb-0">Try another keyword or browse all articles from the blog feed.</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="glass-panel p-5 text-center">
+        <h3 class="mb-3" style="letter-spacing:-0.05em; font-weight:800;">Search for a story</h3>
+        <p class="text-muted mb-0">Enter a keyword above to discover writing that matches your interests.</p>
+      </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

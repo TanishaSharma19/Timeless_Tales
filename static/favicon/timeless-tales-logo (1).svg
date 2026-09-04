@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="quillGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="pageLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.06)"/>
+    </linearGradient>
+    <linearGradient id="pageRight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.14)"/>
+    </linearGradient>
+    <linearGradient id="inkLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="outerGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="quillGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="circleClip">
+      <circle cx="80" cy="80" r="68"/>
+    </clipPath>
+  </defs>
+
+  <!-- Outer glow ring -->
+  <circle cx="80" cy="80" r="76" fill="none" stroke="url(#ringGrad)" stroke-width="1.5" opacity="0.6" filter="url(#outerGlow)"/>
+
+  <!-- Accent ring -->
+  <circle cx="80" cy="80" r="72" fill="none" stroke="url(#ringGrad)" stroke-width="3" opacity="0.9"/>
+
+  <!-- Main dark background circle -->
+  <circle cx="80" cy="80" r="68" fill="url(#bgGrad)"/>
+
+  <!-- Subtle inner radial highlight -->
+  <radialGradient id="innerLight" cx="35%" cy="28%" r="55%">
+    <stop offset="0%" stop-color="rgba(37,99,235,0.15)"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+  </radialGradient>
+  <circle cx="80" cy="80" r="68" fill="url(#innerLight)"/>
+
+  <!-- Decorative arc (top) -->
+  <path d="M 28 54 Q 80 24 132 54" fill="none" stroke="url(#ringGrad)" stroke-width="0.8" opacity="0.3" clip-path="url(#circleClip)"/>
+
+  <!-- OPEN BOOK -->
+  <!-- Left page -->
+  <path d="M 30 104 Q 30 68 80 63 L 80 112 Q 56 112 30 106 Z"
+        fill="url(#pageLeft)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+  <!-- Right page -->
+  <path d="M 130 104 Q 130 68 80 63 L 80 112 Q 104 112 130 106 Z"
+        fill="url(#pageRight)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+  <!-- Book bottom curve -->
+  <path d="M 30 106 Q 80 118 130 106" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <!-- Spine -->
+  <line x1="80" y1="63" x2="80" y2="112" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+  <!-- Left page text lines -->
+  <line x1="40" y1="82" x2="74" y2="80" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+  <line x1="40" y1="90" x2="74" y2="88" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+  <line x1="40" y1="98" x2="70" y2="96" stroke="rgba(255,255,255,0.11)" stroke-width="1"/>
+  <!-- Right page text lines -->
+  <line x1="86" y1="80" x2="120" y2="82" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+  <line x1="86" y1="88" x2="120" y2="90" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <line x1="86" y1="96" x2="114" y2="98" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- GOLDEN QUILL (diagonal, sweeping across the book) -->
+  <g filter="url(#quillGlow)" transform="rotate(-38 80 82)">
+    <!-- Feather right lobe -->
+    <path d="M 84 42 C 102 46 106 68 94 90 C 89 98 84 102 80 104
+             C 83 90 88 72 84 42 Z"
+          fill="url(#quillGold)" opacity="0.95"/>
+    <!-- Feather left lobe -->
+    <path d="M 84 42 C 66 48 62 72 76 100 C 78 103 80 104 80 104
+             C 77 90 73 72 84 42 Z"
+          fill="#fde68a" opacity="0.55"/>
+    <!-- Center vein -->
+    <line x1="84" y1="44" x2="80" y2="104" stroke="#b45309" stroke-width="0.8" opacity="0.7"/>
+    <!-- Cross barbs left -->
+    <line x1="82" y1="55" x2="70" y2="62" stroke="#fbbf24" stroke-width="0.6" opacity="0.5"/>
+    <line x1="81" y1="64" x2="67" y2="70" stroke="#fbbf24" stroke-width="0.6" opacity="0.4"/>
+    <line x1="80" y1="73" x2="66" y2="78" stroke="#fbbf24" stroke-width="0.6" opacity="0.3"/>
+    <!-- Cross barbs right -->
+    <line x1="83" y1="55" x2="96" y2="60" stroke="#f59e0b" stroke-width="0.6" opacity="0.5"/>
+    <line x1="82" y1="64" x2="96" y2="68" stroke="#f59e0b" stroke-width="0.6" opacity="0.4"/>
+    <line x1="81" y1="73" x2="95" y2="76" stroke="#f59e0b" stroke-width="0.6" opacity="0.3"/>
+    <!-- Nib -->
+    <path d="M 80 104 L 76 116 L 80 112 L 84 116 Z" fill="#fbbf24" stroke="#d97706" stroke-width="0.6"/>
+    <!-- Ink drop / trail -->
+    <path d="M 80 114 Q 77 122 79 128" fill="none" stroke="url(#inkLine)" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+  </g>
+
+  <!-- Sparkle stars -->
+  <!-- Top right sparkle -->
+  <g opacity="0.9">
+    <line x1="126" y1="38" x2="126" y2="46" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="122" y1="42" x2="130" y2="42" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="123" y1="39" x2="129" y2="45" stroke="#fbbf24" stroke-width="0.8" stroke-linecap="round"/>
+    <line x1="129" y1="39" x2="123" y2="45" stroke="#fbbf24" stroke-width="0.8" stroke-linecap="round"/>
+  </g>
+  <!-- Small sparkle top left -->
+  <g opacity="0.6">
+    <line x1="42" y1="44" x2="42" y2="50" stroke="#7c3aed" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="39" y1="47" x2="45" y2="47" stroke="#7c3aed" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+  <!-- Tiny dot accents -->
+  <circle cx="118" cy="55" r="1.8" fill="#2563eb" opacity="0.7"/>
+  <circle cx="134" cy="64" r="1.2" fill="#7c3aed" opacity="0.5"/>
+  <circle cx="34"  cy="56" r="1.4" fill="#fbbf24" opacity="0.5"/>
+
+  <!-- Thin bottom separator line -->
+  <line x1="54" y1="130" x2="106" y2="130" stroke="url(#ringGrad)" stroke-width="0.8" opacity="0.6"/>
+</svg>

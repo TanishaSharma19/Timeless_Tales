@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Page {% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="page-shell">
+  <div class="container py-5">
+   <div class="form-panel">
+     <div class="form-card">
+       <div class="eyebrow">Settings</div>
+       <h2 class="mb-3">Update your profile</h2>
+       <p class="section-subtitle mb-4">Keep your author details accurate and make your profile feel polished, personal, and memorable.</p>
+
+       <form action="/edit_profile/" enctype="multipart/form-data" method="POST">
+         {% csrf_token %}
+         <div class="row g-3">
+           {% for field in form %}
+           <div class="col-12">
+             <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+             {{ field }}
+             {% if field.help_text %}<small class="d-block mt-2 text-muted">{{ field.help_text }}</small>{% endif %}
+             {% if field.errors %}<div class="text-danger small mt-1">{{ field.errors|join:', ' }}</div>{% endif %}
+           </div>
+           {% endfor %}
+         </div>
+         <button type="submit" class="btn btn-primary mt-4">Save changes</button>
+       </form>
+     </div>
+   </div>
+  </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+   {% if alert %}
+   alert('Your Profile has been updated successfully.');
+   document.location = '/profile/';
+   {% endif %}
+</script>
+{% endblock %}

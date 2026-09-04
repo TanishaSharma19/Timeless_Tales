@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="page-shell">
+  <div class="container py-5">
+    {% for i in post %}
+    <div class="glass-panel p-4 p-lg-5">
+      <div class="page-header mb-4">
+        <div>
+          <div class="eyebrow">Author profile</div>
+          <h1 class="section-heading">{{ i.author.get_full_name|default:i.author.username }}</h1>
+        </div>
+      </div>
+
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-4 text-center">
+          {% if i.author.profile.image %}
+          <img src="{{ i.author.profile.image.url }}" alt="{{ i.author.username }} profile photo" class="img-fluid rounded-circle shadow-lg" style="width: 260px; height: 260px; object-fit: cover; border: 6px solid rgba(255,255,255,0.75);">
+          {% else %}
+          <div class="mx-auto d-flex align-items-center justify-content-center rounded-circle shadow-lg" style="width: 260px; height: 260px; background: linear-gradient(135deg, #dbeafe, #ede9fe); color: var(--blog-primary); font-size: 4rem; font-weight: 800; border: 6px solid rgba(255,255,255,0.75);">{{ i.author.username|first|upper }}</div>
+          {% endif %}
+        </div>
+
+        <div class="col-lg-8">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="stat-card h-100">
+                <small>Username</small>
+                <h3 style="font-size: 1.5rem;">{{ i.author }}</h3>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="stat-card h-100">
+                <small>Full Name</small>
+                <h3 style="font-size: 1.5rem;">{{ i.author.get_full_name }}</h3>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="stat-card h-100">
+                <small>Email</small>
+                <h3 style="font-size: 1.1rem; word-break: break-word;">{{ i.author.email }}</h3>
+              </div>
+            </div>
+            {% if i.author.profile.bio %}
+            <div class="col-md-6">
+              <div class="stat-card h-100">
+                <small>Bio</small>
+                <h3 style="font-size: 1rem; line-height: 1.6; font-weight: 600;">{{ i.author.profile.bio }}</h3>
+              </div>
+            </div>
+            {% endif %}
+            {% if i.author.profile.linkedin or i.author.profile.instagram or i.author.profile.facebook %}
+            <div class="col-12">
+              <div class="stat-card h-100">
+                <small>Links</small>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                  {% if i.author.profile.linkedin %}<a href="{{ i.author.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">LinkedIn</a>{% endif %}
+                  {% if i.author.profile.instagram %}<a href="{{ i.author.profile.instagram }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">Instagram</a>{% endif %}
+                  {% if i.author.profile.facebook %}<a href="{{ i.author.profile.facebook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">Facebook</a>{% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

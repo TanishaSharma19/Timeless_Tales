@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile {% endblock %}
+{% block profileactive %} active {% endblock profileactive %}
+
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="page-shell">
+  <div class="container py-5">
+    <div class="glass-panel p-4 p-lg-5">
+      <div class="page-header mb-4">
+<div>
+  <div class="eyebrow">Profile</div>
+  <h1 class="section-heading">Your public identity</h1>
+</div>
+<div class="d-flex gap-2 flex-wrap">
+  <a href="/edit_profile/" class="btn btn-outline-secondary">Edit Profile</a>
+  <a href="/dashboard/" class="btn btn-primary">Writer Dashboard</a>
+</div>
+      </div>
+
+      <div class="row g-4 align-items-center">
+<div class="col-lg-4">
+  <div class="text-center">
+    {% if user.profile.image %}
+    <img src="{{user.profile.image.url}}" alt="{{ user.username }} profile photo" class="img-fluid rounded-circle shadow-lg" style="width: 260px; height: 260px; object-fit: cover; border: 6px solid rgba(255,255,255,0.75);">
+    {% else %}
+    <div class="mx-auto d-flex align-items-center justify-content-center rounded-circle shadow-lg" style="width: 260px; height: 260px; background: linear-gradient(135deg, #dbeafe, #ede9fe); color: var(--blog-primary); font-size: 4rem; font-weight: 800; border: 6px solid rgba(255,255,255,0.75);">{{ user.username|first|upper }}</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="col-lg-8">
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="stat-card h-100">
+        <small>Username</small>
+        <h3 style="font-size: 1.5rem;">{{ user }}</h3>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="stat-card h-100">
+        <small>Full Name</small>
+        <h3 style="font-size: 1.5rem;">{{ user.get_full_name }}</h3>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="stat-card h-100">
+        <small>Email</small>
+        <h3 style="font-size: 1.1rem; word-break: break-word;">{{ user.email }}</h3>
+      </div>
+    </div>
+    {% if user.profile.phone_no %}
+    <div class="col-md-6">
+      <div class="stat-card h-100">
+        <small>Phone</small>
+        <h3 style="font-size: 1.1rem;">{{ user.profile.phone_no }}</h3>
+      </div>
+    </div>
+    {% endif %}
+    {% if user.profile.bio %}
+    <div class="col-12">
+      <div class="stat-card h-100">
+        <small>Bio</small>
+        <h3 style="font-size: 1.05rem; line-height: 1.6; font-weight: 600;">{{ user.profile.bio }}</h3>
+      </div>
+    </div>
+    {% endif %}
+    {% if user.profile.linkedin or user.profile.instagram or user.profile.facebook %}
+    <div class="col-12">
+      <div class="stat-card h-100">
+        <small>Links</small>
+        <div class="d-flex flex-wrap gap-2 mt-3">
+          {% if user.profile.linkedin %}<a href="{{ user.profile.linkedin }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">LinkedIn</a>{% endif %}
+          {% if user.profile.instagram %}<a href="{{ user.profile.instagram }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">Instagram</a>{% endif %}
+          {% if user.profile.facebook %}<a href="{{ user.profile.facebook }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">Facebook</a>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
