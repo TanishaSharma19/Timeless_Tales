@@ -114,7 +114,7 @@ Access the Django Admin panel at:
 
 ## 🌐 Repository
 
-[Timeless Tales on GitHub](https://github.com/TanishaSharma19/Timeless_Tales?utm_source=chatgpt.com)
+[Timeless Tales on GitHub](https://github.com/TanishaSharma19/Timeless_Tales)
 
 ## 👩‍💻 Author
 
